@@ -4,7 +4,8 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    pass
+    is_organisor = models.BooleanField(default=True)
+    is_agent = models.BooleanField(default=False)
 
 
 class UserProfile(models.Model):
@@ -33,7 +34,6 @@ class Agent(models.Model):
 
 
 def post_user_created_signal(sender, instance, created, **kwargs):
-    print(instance, created)
     if created:
         UserProfile.objects.create(user=instance)
 
